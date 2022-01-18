@@ -965,6 +965,8 @@ def replace_refs_factory(references, use_cleveref_default, use_eqref,
             if nolink:  # https://tex.stackexchange.com/a/323919
                 ret['c'][1] = \
                   r'{\protect\NoHyper' + ret['c'][1] + r'\protect\endNoHyper}'
+        if fmt == 'docx':
+            ret = RawInline('openxml', r'<w:fldSimple w:instr="REF ref_%s \h"><w:r><w:t>%s</w:t></w:r></w:fldSimple>'%(label, refname + NBSP + text))
         else:
             if use_eqref:
                 text = '(' + text + ')'
